@@ -14,6 +14,7 @@ def main(args):
 
     dataset = common.Dataset(
         id={{package}}.__name__,
+        name="--TODO--",
         publisher_name ="Max Planck Institute for Evolutionary Anthropology",
         publisher_place="Leipzig",
         publisher_url="http://www.eva.mpg.de",
@@ -21,6 +22,9 @@ def main(args):
         domain='{{package}}.clld.org')
     DBSession.add(dataset)
 
+    #
+    # TODO: add editors!
+    #
 
 def prime_cache(args):
     """If data needs to be denormalized for lookup, do that here.
