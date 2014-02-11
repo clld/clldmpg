@@ -1,0 +1,7 @@
+[clld]
+menuitems_list = contributions parameters languages contributors sentences sources
+app_template = {{package}}.mako
+github_repos = clld/{{package}}
+
+[mako]
+directories_list = {{package}}:templates clldmpg:templates clld:web/templates

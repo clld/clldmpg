@@ -1,4 +1,7 @@
+development.ini
 *.py[cod]
+*.komodoproject
+*/static/download
 
 # C extensions
 *.so
@@ -15,6 +18,7 @@ var
 sdist
 develop-eggs
 .installed.cfg
+lib64
 __pycache__
 
 # Installer logs
