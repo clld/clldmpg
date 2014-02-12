@@ -11,7 +11,7 @@ except IOError:
     README = ''
 
 install_requires = [
-    'clld',
+    'clld>=0.4',
 ]
 
 tests_require = [
