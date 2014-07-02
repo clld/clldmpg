@@ -49,7 +49,7 @@
 <h5>Legal Representation</h5>
 <p>
     The Max Planck Society is legally represented by its Board of Directors, which, in
-    turn, is represented by the President of the Society, Professor Peter Gruss, and by
+    turn, is represented by the President of the Society, Professor Martin Stratmann, and by
     Secretary General Dr. Ludwig Kronthaler.
 </p>
 <h5>Value added tax identification number</h5>
