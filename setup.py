@@ -34,7 +34,7 @@ testing_extras = tests_require + [
     ]
 
 setup(name='clldmpg',
-      version='0.1',
+      version='0.2',
       description=(
           'Python library supporting development of CLLD apps maintained by MPG'),
       long_description='',
@@ -42,9 +42,8 @@ setup(name='clldmpg',
         "Intended Audience :: Developers",
         "Programming Language :: Python",
         "Programming Language :: Python :: 2.7",
-        #"Programming Language :: Python :: 3",
-        #"Programming Language :: Python :: 3.2",
-        #"Programming Language :: Python :: 3.3",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.4",
         "Programming Language :: Python :: Implementation :: CPython",
         "Topic :: Internet :: WWW/HTTP",
         "Topic :: Internet :: WWW/HTTP :: WSGI",
