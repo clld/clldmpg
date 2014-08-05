@@ -11,7 +11,7 @@ except IOError:
     README = ''
 
 install_requires = [
-    'clld>=0.4',
+    'clld>=0.16',
 ]
 
 tests_require = [
@@ -34,7 +34,7 @@ testing_extras = tests_require + [
     ]
 
 setup(name='clldmpg',
-      version='0.2',
+      version='0.3',
       description=(
           'Python library supporting development of CLLD apps maintained by MPG'),
       long_description='',
