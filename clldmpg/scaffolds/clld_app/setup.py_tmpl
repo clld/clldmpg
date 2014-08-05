@@ -2,10 +2,10 @@ from setuptools import setup, find_packages
 
 
 requires = [
-    'clld',
+    'clld>=0.16',
     'clldmpg',
-    'pyramid',
-    'SQLAlchemy',
+    'pyramid>=1.5.1',
+    'SQLAlchemy>=0.9.7',
     'transaction',
     'pyramid_tm',
     'zope.sqlalchemy',
