@@ -1,9 +1,5 @@
-import os
-
 from setuptools import setup, find_packages
 
-
-here = os.path.abspath(os.path.dirname(__file__))
 
 requires = [
     'clld',
@@ -13,10 +9,8 @@ requires = [
     'transaction',
     'pyramid_tm',
     'zope.sqlalchemy',
-    'gunicorn',
-    'psycopg2',
     'waitress',
-    ]
+]
 
 setup(name='{{project}}',
       version='0.0',
