@@ -35,7 +35,7 @@ testing_extras = tests_require + [
     ]
 
 setup(name='clldmpg',
-      version='0.4',
+      version='0.5',
       description=(
           'Python library supporting development of CLLD apps maintained by MPG'),
       long_description='',
