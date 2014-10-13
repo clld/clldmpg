@@ -11,7 +11,8 @@ except IOError:
     README = ''
 
 install_requires = [
-    'clld>=0.18',
+    'clld>=0.19',
+    'newrelic',
 ]
 
 tests_require = [
