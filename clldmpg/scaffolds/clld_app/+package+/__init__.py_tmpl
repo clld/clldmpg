@@ -11,4 +11,5 @@ def main(global_config, **settings):
     config.include('clldmpg')
     config.include('{{package}}.datatables')
     config.include('{{package}}.adapters')
+    config.include('{{package}}.maps')
     return config.make_wsgi_app()
