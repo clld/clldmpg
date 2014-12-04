@@ -18,7 +18,7 @@ def main(args):
         publisher_name ="Max Planck Institute for Evolutionary Anthropology",
         publisher_place="Leipzig",
         publisher_url="http://www.eva.mpg.de",
-        license="http://creativecommons.org/licenses/by/3.0/",
+        license="http://creativecommons.org/licenses/by/4.0/",
         domain='{{package}}.clld.org')
     DBSession.add(dataset)
 
