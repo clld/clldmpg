@@ -12,7 +12,6 @@ except IOError:
 
 install_requires = [
     'clld>=0.19',
-    'newrelic',
 ]
 
 tests_require = [
@@ -70,4 +69,3 @@ setup(name='clldmpg',
         clldmpg_app=clldmpg.scaffolds:ClldAppTemplate
       """
       )
-
