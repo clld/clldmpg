@@ -11,14 +11,13 @@ except IOError:
     README = ''
 
 install_requires = [
-    'clld>=0.19',
+    'clld>=0.32.1',
 ]
 
 tests_require = [
     'WebTest >= 1.3.1', # py3 compat
     'pep8',
     'mock',
-    'selenium',
 ]
 
 docs_extras = [
