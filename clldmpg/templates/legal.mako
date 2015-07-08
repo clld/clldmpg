@@ -64,9 +64,8 @@
     <address>
         <strong>Prof. Dr. Martin Haspelmath</strong><br/>
         ${request.dataset.publisher_name}<br/>
-        Deutscher Platz 6<br/>
-        04103 Leipzig<br/>
-        Tel.: +49 (341) 3550 - 307
+        Kahlaische Strasse 10<br/>
+        07745 Jena
     </address>
 </p>
 <h5>Legal Structure</h5>
