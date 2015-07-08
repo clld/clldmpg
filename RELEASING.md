@@ -9,7 +9,7 @@ Releasing clld
 
 - Make sure all scaffold tests pass:
 
-  $ ./venvs/clld/clldmpg/build.sh "<prev-rel-no>"
+  $ ./venvs/clld-clld/clldmpg/build.sh "<prev-rel-no>"
 
 - Update translations (using a py3 env with babel patched for py3 compatibility).
 
@@ -34,5 +34,4 @@ Releasing clld
   PyPI::
 
   $ ./pypi.sh <release number>
-
 
