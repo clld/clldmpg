@@ -1,5 +1,5 @@
-Releasing clld
-==============
+Releasing clldmpg
+=================
 
 - Do platform test via tox:
 
