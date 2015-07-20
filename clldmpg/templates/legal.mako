@@ -63,7 +63,7 @@
     of the ${request.dataset.publisher_name} is:
     <address>
         <strong>Prof. Dr. Martin Haspelmath</strong><br/>
-        ${request.dataset.publisher_name}<br/>
+        Max Planck Institute for the Science of Human History<br/>
         Kahlaische Strasse 10<br/>
         07745 Jena
     </address>
