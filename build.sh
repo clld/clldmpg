@@ -18,7 +18,7 @@ cd testapp
 python setup.py develop
 python testapp/scripts/initializedb.py development.ini
 pip install nose
-pip install mock
+pip install mock==1.1
 nosetests
 cd $VENVS
 rm -rf testapp
