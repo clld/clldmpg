@@ -7,4 +7,4 @@ class Tests(TestCase):
     def test_includeme(self):
         from clldmpg import includeme
 
-        includeme(Configurator())
+        includeme(Configurator(settings={'sqlalchemy.url': 'sqlite://'}))

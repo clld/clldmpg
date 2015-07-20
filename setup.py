@@ -1,5 +1,4 @@
 import os
-import sys
 
 from setuptools import setup, find_packages
 
@@ -11,11 +10,11 @@ except IOError:
     README = ''
 
 install_requires = [
-    'clld>=0.33',
+    'clld>=1.0.0',
 ]
 
 tests_require = [
-    'WebTest >= 1.3.1', # py3 compat
+    'WebTest >= 1.3.1',  # py3 compat
     'pep8',
     'mock',
 ]
@@ -29,15 +28,16 @@ docs_extras = [
 testing_extras = tests_require + [
     'nose',
     'coverage',
-    'virtualenv', # for scaffolding tests
+    'virtualenv',  # for scaffolding tests
     ]
 
-setup(name='clldmpg',
-      version='0.8',
-      description=(
-          'Python library supporting development of CLLD apps maintained by MPG'),
-      long_description='',
-      classifiers=[
+setup(
+    name='clldmpg',
+    version='1.0.0',
+    description=(
+        'Python library supporting development of CLLD apps maintained by MPG'),
+    long_description='',
+    classifiers=[
         "Intended Audience :: Developers",
         "Programming Language :: Python",
         "Programming Language :: Python :: 2.7",
@@ -46,25 +46,24 @@ setup(name='clldmpg',
         "Programming Language :: Python :: Implementation :: CPython",
         "Topic :: Internet :: WWW/HTTP",
         "Topic :: Internet :: WWW/HTTP :: WSGI",
-        ],
-      keywords='web pyramid',
-      author="Robert Forkel, MPI EVA",
-      author_email="xrotwang+clld@googlemail.com",
-      url="http://clld.org",
-      license="Apache Software License",
-      packages=find_packages(),
-      include_package_data=True,
-      zip_safe=False,
-      install_requires = install_requires,
-      extras_require = {'testing': testing_extras, 'docs': docs_extras},
-      tests_require = tests_require,
-      test_suite="clldmpg.tests",
-      message_extractors = {'clldmpg': [
-            ('**.py', 'python', None),
-            ('**.mako', 'mako', None),
-            ('static/**', 'ignore', None)]},
-      entry_points = """\
+    ],
+    keywords='web pyramid',
+    author="Robert Forkel, MPI SHH",
+    author_email="xrotwang+clld@googlemail.com",
+    url="http://clld.org",
+    license="Apache Software License",
+    packages=find_packages(),
+    include_package_data=True,
+    zip_safe=False,
+    install_requires = install_requires,
+    extras_require = {'testing': testing_extras, 'docs': docs_extras},
+    tests_require = tests_require,
+    test_suite="clldmpg.tests",
+    message_extractors = {'clldmpg': [
+        ('**.py', 'python', None),
+        ('**.mako', 'mako', None),
+        ('static/**', 'ignore', None)]},
+    entry_points = """\
         [pyramid.scaffold]
         clldmpg_app=clldmpg.scaffolds:ClldAppTemplate
-      """
-      )
+    """)
