@@ -1,13 +1,5 @@
-import os
-
 from setuptools import setup, find_packages
 
-
-here = os.path.abspath(os.path.dirname(__file__))
-try:
-    README = open(os.path.join(here, 'README.md')).read()
-except IOError:
-    README = ''
 
 install_requires = [
     'clld>=1.0.0,<2.0.0',
@@ -23,19 +15,19 @@ docs_extras = [
     'Sphinx',
     'docutils',
     'repoze.sphinx.autointerface',
-    ]
+]
 
 testing_extras = tests_require + [
     'nose',
     'coverage',
     'virtualenv',  # for scaffolding tests
-    ]
+]
 
 setup(
     name='clldmpg',
-    version='1.0.0',
+    version='1.1.0',
     description=(
-        'Python library supporting development of CLLD apps maintained by MPG'),
+        'Python library supporting development of CLLD apps maintained by MPI SHH'),
     long_description='',
     classifiers=[
         "Intended Audience :: Developers",
@@ -49,21 +41,21 @@ setup(
     ],
     keywords='web pyramid',
     author="Robert Forkel, MPI SHH",
-    author_email="xrotwang+clld@googlemail.com",
+    author_email="forkel@shh.mpg.de",
     url="http://clld.org",
     license="Apache Software License",
     packages=find_packages(),
     include_package_data=True,
     zip_safe=False,
-    install_requires = install_requires,
-    extras_require = {'testing': testing_extras, 'docs': docs_extras},
-    tests_require = tests_require,
+    install_requires=install_requires,
+    extras_require={'testing': testing_extras, 'docs': docs_extras},
+    tests_require=tests_require,
     test_suite="clldmpg.tests",
-    message_extractors = {'clldmpg': [
+    message_extractors={'clldmpg': [
         ('**.py', 'python', None),
         ('**.mako', 'mako', None),
         ('static/**', 'ignore', None)]},
-    entry_points = """\
+    entry_points="""\
         [pyramid.scaffold]
         clldmpg_app=clldmpg.scaffolds:ClldAppTemplate
     """)
