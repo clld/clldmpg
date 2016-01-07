@@ -26,8 +26,8 @@ class MpgOlacConfig(OlacConfig):
 
 
 def includeme(config):
-    config.registry.registerUtility(MpgOlacConfig(), IOlacConfig)
     config.include('clld.web.app')
+    config.registry.registerUtility(MpgOlacConfig(), IOlacConfig)
     config.add_static_view('clldmpg-static', 'clldmpg:static')
     config.add_settings({'clld.publisher_logo': 'clldmpg:static/minerva.png'})
 
