@@ -5,24 +5,16 @@ from clld.web.views.olac import OlacConfig, Participant, Institution
 
 
 class MpgOlacConfig(OlacConfig):
+    def admin(self, req):
+        return Participant("Admin", 'Robert Forkel', 'forkel@shh.mpg.de')
+
     def description(self, req):
-        return {
-            'archiveURL': 'http://%s/' % req.dataset.domain,
-            'participants': [
-                Participant("Admin", 'Robert Forkel', 'forkel@shh.mpg.de'),
-            ] + [
-                Participant(
-                    "Editor",
-                    ed.contributor.name,
-                    ed.contributor.email or req.dataset.contact)
-                for ed in req.dataset.editors],
-            'institution': Institution(
-                'Max Planck Institute for the Science of Human History',
-                'http://shh.mpg.de',
-                'Jena, Germany',
-            ),
-            'synopsis': req.dataset.description or '',
-        }
+        res = OlacConfig.description(self, req)
+        res['institution'] = Institution(
+            'Max Planck Institute for the Science of Human History',
+            'http://shh.mpg.de',
+            'Jena, Germany')
+        return res
 
 
 def includeme(config):

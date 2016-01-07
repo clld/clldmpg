@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 
 install_requires = [
-    'clld>=1.0.0,<2.0.0',
+    'clld>=2.0.1',
 ]
 
 tests_require = [
