@@ -62,7 +62,7 @@
     The editor responsible for the information within the scope of the internet presence
     of the ${request.dataset.publisher_name} is:
     <address>
-        <strong>Prof. Dr. Martin Haspelmath</strong><br/>
+        <strong>${'Prof. Dr. Martin Haspelmath' if editor is UNDEFINED else editor}</strong><br/>
         Max Planck Institute for the Science of Human History<br/>
         Kahlaische Strasse 10<br/>
         07745 Jena
