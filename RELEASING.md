@@ -19,7 +19,7 @@ Releasing clldmpg
 
 - Bump version number:
 
-  $ git commit -a -m"bumbed version number"
+  $ git commit -a -m"bumped version number"
 
 - Create a release tag:
 
