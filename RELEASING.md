@@ -33,5 +33,5 @@ Releasing clldmpg
 - Make sure your system Python has ``setuptools-git`` installed and release to
   PyPI::
 
-  $ ./pypi.sh <release number>
+  $ python setup.py sdist register upload
 
