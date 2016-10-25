@@ -18,6 +18,14 @@ SERVICE_URL = URL("https://cdstar.shh.mpg.de/")
 
 
 def mimetype(obj):
+    if hasattr(obj, 'mimetype'):
+        return obj.mimetype
+    if hasattr(obj, 'mime_type'):
+        return obj.mime_type
+    if obj.jsondata.get('mimetype'):
+        return obj.jsondata['mimetype']
+    if obj.jsondata.get('mime_type'):
+        return obj.jsondata['mime_type']
     return guess_type(obj.jsondata['original'])[0]
 
 
@@ -35,8 +43,8 @@ def bitstream_url(obj, type_='original'):
     return SERVICE_URL.path(path).as_string()
 
 
-def linked_image(obj):
-    if maintype(obj) != 'image':
+def linked_image(obj, check=True):
+    if check and maintype(obj) != 'image':
         raise ValueError('type mismatch: {0} and image'.format(maintype(obj)))
     return HTML.a(
         HTML.img(src=bitstream_url(obj, 'web'), class_='image'),
