@@ -66,4 +66,9 @@ def _media(maintype_, obj, **kw):
 
 
 audio = partial(_media, 'audio')
-video = partial(_media, 'video')
+
+
+def video(obj, **kw):
+    if obj.jsondata.get('thumbnail'):
+        kw['poster'] = bitstream_url(obj, type_='thumbnail')
+    return _media('video', obj, **kw)
