@@ -87,7 +87,7 @@ def link(obj, label=None, with_mime_type=True, badge=False):
     return HTML.a(
         HTML.span(
             icon(icon_, inverted=badge),
-            label,
+            ' ' + label,
             class_='badge' if badge else 'cdstar_link'),
         href=bitstream_url(obj))
 
@@ -98,7 +98,7 @@ def linked_image(obj, check=True):
     return HTML.a(
         HTML.img(src=bitstream_url(obj, 'web'), class_='image'),
         href=bitstream_url(obj),
-        title="view image [{0}]".format(format_size(obj.jsondata.get('size', 0))))
+        title="View image ({0})".format(format_size(obj.jsondata.get('size', 0))))
 
 
 def _media(maintype_, obj, **kw):
@@ -112,7 +112,11 @@ def _media(maintype_, obj, **kw):
             maintype_)),
         HTML.source(src=bitstream_url(obj), type=mimetype(obj)), **kw)
     return HTML.div(
-        media_element, HTML.br(), link(obj, label=label), style='margin-top: 10px')
+        media_element,
+        HTML.br(),
+        link(obj, label=label),
+        class_='cdstar_{0}_link'.format(maintype_),
+        style='margin-top: 10px')
 
 
 audio = partial(_media, 'audio')
