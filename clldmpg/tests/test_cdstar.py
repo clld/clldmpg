@@ -34,7 +34,7 @@ class Tests(TestCase):
         obj = MockObject(dict(objid='x', original='1'))
         self.assertRaises(ValueError, video, obj)
 
-        obj = MockObject(dict(objid='x', original='a.mp4', thumbnail='a.jpg'))
+        obj = MockObject(dict(objid='x', original='a.mp4', thumbnail='a.jpg', size=10345))
         self.assertIn('<video', video(obj))
         self.assertIn('poster=', video(obj))
         self.assertRaises(ValueError, audio, obj)

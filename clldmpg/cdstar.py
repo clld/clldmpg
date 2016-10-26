@@ -12,6 +12,7 @@ from functools import partial
 
 from purl import URL
 from clld.web.util.htmllib import HTML, literal
+from clld.web.util.helpers import icon
 from clldutils.misc import format_size
 
 SERVICE_URL = URL("https://cdstar.shh.mpg.de/")
@@ -26,13 +27,11 @@ def mimetype(obj):
         return obj.jsondata['mimetype']
     if obj.jsondata.get('mime_type'):
         return obj.jsondata['mime_type']
-    return guess_type(obj.jsondata['original'])[0]
+    return guess_type(obj.jsondata['original'])[0] or 'application/octet-stream'
 
 
-def maintype(obj):
-    mtype = mimetype(obj)
-    if mtype is None:
-        return
+def maintype(obj, mimetype_=None):
+    mtype = mimetype_ or mimetype(obj)
     return mtype.split('/')[0]
 
 
@@ -41,6 +40,55 @@ def bitstream_url(obj, type_='original'):
         obj.jsondata['objid'],
         obj.jsondata.get(type_) or obj.jsondata['original'])
     return SERVICE_URL.path(path).as_string()
+
+
+ICON_FOR_MIMETYPE = {
+    'facetime-video': [
+        'video',
+    ],
+    'camera': [
+        'image',
+    ],
+    'headphones': [
+        'audio',
+    ],
+    'file': [
+        'text',
+        'application/pdf',
+        'application/msword',
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    ],
+    'list': [
+        'application/vnd.ms-excel',
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        'text/csv',
+    ],
+}
+MIMETYPE_TO_ICON = {}
+for icon_, types_ in ICON_FOR_MIMETYPE.items():
+    for type_ in types_:
+        MIMETYPE_TO_ICON[type_] = icon_
+
+
+def link(obj, label='View file', with_mime_type=True, badge=False):
+    mtype = mimetype(obj)
+    icon_ = MIMETYPE_TO_ICON.get(
+        mtype, MIMETYPE_TO_ICON.get(maintype(obj, mimetype_=mtype), 'download-alt'))
+    md = ''
+    if obj.jsondata.get('size'):
+        md = format_size(obj.jsondata['size'])
+    if with_mime_type:
+        if md:
+            md += ', '
+        md += mtype
+    if md:
+        label += ' (%s)' % md
+    return HTML.a(
+        HTML.span(
+            icon(icon_, inverted=badge),
+            label,
+            class_='badge' if badge else 'cdstar_link'),
+        href=bitstream_url(obj))
 
 
 def linked_image(obj, check=True):
@@ -57,12 +105,11 @@ def _media(maintype_, obj, **kw):
     if maintype(obj) != maintype_:
         raise ValueError('type mismatch: {0} and {1}'.format(maintype(obj), maintype_))
     kw.setdefault('controls', 'controls')
-    return getattr(HTML, maintype_)(
+    media_element = getattr(HTML, maintype_)(
         literal('Your browser does not support the <code>{0}</code> element.'.format(
             maintype_)),
-        'You can download the file from',
-        HTML.a('here', href=bitstream_url(obj)),
         HTML.source(src=bitstream_url(obj), type=mimetype(obj)), **kw)
+    return HTML.div(media_element, link(obj))
 
 
 audio = partial(_media, 'audio')
