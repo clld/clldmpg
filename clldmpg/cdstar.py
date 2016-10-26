@@ -70,7 +70,8 @@ for icon_, types_ in ICON_FOR_MIMETYPE.items():
         MIMETYPE_TO_ICON[type_] = icon_
 
 
-def link(obj, label='View file', with_mime_type=True, badge=False):
+def link(obj, label=None, with_mime_type=True, badge=False):
+    label = label or 'View file'
     mtype = mimetype(obj)
     icon_ = MIMETYPE_TO_ICON.get(
         mtype, MIMETYPE_TO_ICON.get(maintype(obj, mimetype_=mtype), 'download-alt'))
@@ -101,6 +102,7 @@ def linked_image(obj, check=True):
 
 
 def _media(maintype_, obj, **kw):
+    label = kw.pop('label', None)
     assert maintype_ in ['audio', 'video']
     if maintype(obj) != maintype_:
         raise ValueError('type mismatch: {0} and {1}'.format(maintype(obj), maintype_))
@@ -109,7 +111,8 @@ def _media(maintype_, obj, **kw):
         literal('Your browser does not support the <code>{0}</code> element.'.format(
             maintype_)),
         HTML.source(src=bitstream_url(obj), type=mimetype(obj)), **kw)
-    return HTML.div(media_element, link(obj))
+    return HTML.div(
+        media_element, HTML.br(), link(obj, label=label), style='margin-top: 10px')
 
 
 audio = partial(_media, 'audio')
