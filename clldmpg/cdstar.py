@@ -129,7 +129,7 @@ def _media(maintype_, obj, **kw):
     media_element = getattr(HTML, maintype_)(
         literal('Your browser does not support the <code>{0}</code> element.'.format(
             maintype_)),
-        HTML.source(src=bitstream_url(obj), type=mimetype(obj)), **kw)
+        HTML.source(src=bitstream_url(obj, type_='web'), type=mimetype(obj)), **kw)
     return HTML.div(
         media_element,
         HTML.br(),
