@@ -13,6 +13,7 @@ from functools import partial
 from purl import URL
 from clld.web.util.htmllib import HTML, literal
 from clld.web.util.helpers import icon
+from clld.web.datatables.base import Col
 from clldutils.misc import format_size
 
 SERVICE_URL = URL("https://cdstar.shh.mpg.de/")
@@ -90,6 +91,24 @@ def link(obj, label=None, with_mime_type=True, badge=False):
             ' ' + label,
             class_='badge' if badge else 'cdstar_link'),
         href=bitstream_url(obj))
+
+
+class MediaCol(Col):
+    def __init__(self, dt, name, maintype, **kw):
+        self.maintype = maintype
+        kw['bSearchable'] = False
+        kw['bSortable'] = False
+        Col.__init__(self, dt, name, **kw)
+
+    def format(self, item):
+        icon_ = MIMETYPE_TO_ICON.get(self.maintype)
+        if icon_:
+            item = self.get_obj(item)
+            for f in item._files:
+                mtype = maintype(f)
+                if mtype == self.maintype:
+                    return icon(icon_)
+        return ''
 
 
 def linked_image(obj, check=True):

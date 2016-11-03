@@ -2,6 +2,8 @@
 from __future__ import unicode_literals, print_function, division
 from unittest import TestCase
 
+from mock import MagicMock
+
 
 class MockObject(object):
     def __init__(self, jsondata, **attrs):
@@ -27,6 +29,18 @@ class Tests(TestCase):
 
         obj = MockObject(dict(objid='x', other='y'))
         self.assertTrue(bitstream_url(obj, type_='other').endswith('/x/y'))
+
+    def test_MediaCol(self):
+        from clldmpg.cdstar import MediaCol
+
+        col = MediaCol(MagicMock(), 'name', 'audio')
+        self.assertIn(
+            '<i',
+            col.format(MagicMock(_files=[MockObject({}, mime_type='audio/x-wav')])))
+        col = MediaCol(MagicMock(), 'name', 'other')
+        self.assertEqual(
+            col.format(MagicMock(_files=[MockObject({}, mime_type='other/x-wav')])),
+            '')
 
     def test_media(self):
         from clldmpg.cdstar import audio, video, linked_image
