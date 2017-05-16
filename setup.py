@@ -26,7 +26,7 @@ testing_extras = tests_require + [
 
 setup(
     name='clldmpg',
-    version='2.3.4',
+    version='2.4.0',
     description=(
         'Python library supporting development of CLLD apps maintained by MPI SHH'),
     long_description='',
