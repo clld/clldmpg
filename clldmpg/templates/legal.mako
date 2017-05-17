@@ -4,11 +4,10 @@
 
 <p>
     This website is part of the online presence of the
-    <a href="https://www.shh.mpg.de">Max Planck Institute for the Science of Human History</a>.
+    Max Planck Institute for the Science of Human History.
     Please refer to the
-    <a href="http://www.shh.mpg.de/2435/imprint">corresponding imprint</a> for provider
-    information. The responsible editor with regard to media law is listed
-    <a href="http://www.shh.mpg.de/414166/shh-editors-websites">at this link</a>.
+    <a href="http://www.shh.mpg.de/2435/imprint"><strong>corresponding imprint</strong></a> for provider
+    information.
 </p>
 
 <h4>Links to Websites of Third Parties</h4>
