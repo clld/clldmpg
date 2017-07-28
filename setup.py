@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 
 install_requires = [
-    'clld>=3.1.0',
+    'clld>=3.3.1',
     'purl',
 ]
 

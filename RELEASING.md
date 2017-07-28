@@ -33,5 +33,6 @@ Releasing clldmpg
 - Make sure your system Python has ``setuptools-git`` installed and release to
   PyPI::
 
-  $ python setup.py sdist register upload
+  $ python setup.py sdist
+  $ ~/venvs/py34/bin/twine upload dist/clldmpg-<version>.tar.gz
 
