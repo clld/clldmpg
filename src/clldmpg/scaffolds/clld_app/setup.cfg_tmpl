@@ -5,7 +5,7 @@ exclude = .tox
 
 [tool:pytest]
 minversion = 3.1
-testpaths = {{package}}
+testpaths = {{package}}/tests
 mock_use_standalone_module = true
 filterwarnings =
     ignore::sqlalchemy.exc.SAWarning
