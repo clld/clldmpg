@@ -1,32 +1,9 @@
 from setuptools import setup, find_packages
 
 
-install_requires = [
-    'clld>=3.3.1',
-    'purl',
-]
-
-tests_require = [
-    'WebTest >= 1.3.1',  # py3 compat
-    'pep8',
-    'mock',
-]
-
-docs_extras = [
-    'Sphinx',
-    'docutils',
-    'repoze.sphinx.autointerface',
-]
-
-testing_extras = tests_require + [
-    'nose',
-    'coverage',
-    'virtualenv',  # for scaffolding tests
-]
-
 setup(
     name='clldmpg',
-    version='2.5.0',
+    version='3.0.0.dev0',
     description=(
         'Python library supporting development of CLLD apps maintained by MPI SHH'),
     long_description='',
@@ -41,22 +18,25 @@ setup(
         "Topic :: Internet :: WWW/HTTP :: WSGI",
     ],
     keywords='web pyramid',
-    author="Robert Forkel, MPI SHH",
+    author="Robert Forkel",
     author_email="forkel@shh.mpg.de",
     url="http://clld.org",
     license="Apache Software License",
-    packages=find_packages(),
+    packages=find_packages(where='src'),
+    package_dir={'': 'src'},
     include_package_data=True,
     zip_safe=False,
-    install_requires=install_requires,
-    extras_require={'testing': testing_extras, 'docs': docs_extras},
-    tests_require=tests_require,
-    test_suite="clldmpg.tests",
-    message_extractors={'clldmpg': [
+    install_requires=['clld~=4.0', 'purl'],
+    extras_require={
+        'test': ['pytest-clld', 'coverage>=4.2', 'pytest-cov'],
+        'dev': ['flake8', 'wheel', 'twine'],
+    },
+    message_extractors={'src/clldmpg': [
         ('**.py', 'python', None),
         ('**.mako', 'mako', None),
         ('static/**', 'ignore', None)]},
     entry_points="""\
         [pyramid.scaffold]
         clldmpg_app=clldmpg.scaffolds:ClldAppTemplate
-    """)
+""")
+

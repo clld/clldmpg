@@ -1,7 +1,9 @@
+#!/usr/bin/env bash
 VENVS=~/venvs
 
 cd $VENVS/cheesecake
 . bin/activate
+pip install -U setuptools
 cd clldmpg
 git checkout master
 git pull origin master
@@ -12,14 +14,14 @@ cd $VENVS
 virtualenv testapp
 cd testapp
 . bin/activate
+pip install -U setuptools
+pip install -U pip
 pip install "$VENVS/cheesecake/clldmpg/dist/clldmpg-$1.tar.gz"
 pcreate -t clldmpg_app testapp
 cd testapp
-python setup.py develop
+pip install -e .[test]
 python testapp/scripts/initializedb.py development.ini
-pip install nose
-pip install mock==1.0
-nosetests
+pytest
 cd $VENVS
 rm -rf testapp
 

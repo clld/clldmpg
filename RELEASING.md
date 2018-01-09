@@ -11,10 +11,6 @@ Releasing clldmpg
 
   $ ./venvs/clld-clld/clldmpg/build.sh "<prev-rel-no>"
 
-- Update translations (using a py3 env with babel patched for py3 compatibility).
-
-  $ python setup.py compile_catalog
-
 - Change setup.py version to the new version number.
 
 - Bump version number:

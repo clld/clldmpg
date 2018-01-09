@@ -1,9 +1,17 @@
-[nosetests]
-match = ^test
-nocapture = 1
-cover-package = {{package}}
-with-coverage = 1
-cover-erase = 1
+[flake8]
+ignore = E711,E712,D100,D101,D103,D102,D301
+max-line-length = 100
+exclude = .tox
+
+[tool:pytest]
+minversion = 3.1
+testpaths = {{package}}
+mock_use_standalone_module = true
+filterwarnings =
+    ignore::sqlalchemy.exc.SAWarning
+addopts =
+    --cov={{package}}
+    --cov-report term-missing
 
 [compile_catalog]
 directory = {{package}}/locale
