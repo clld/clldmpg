@@ -1,2 +1,3 @@
 include *.txt *.ini *.cfg *.rst
-recursive-include src/clldmpg *.ico *.png *.css *.gif *.jpg *.txt *.mak *.mako *.js *.html *.xml *.woff *.tab *.ini *.mo *.py_tmpl *.ini_tmpl *.cfg_tmpl *.swf *.bib *.pot *.in_tmpl *.txt_tmpl *.mako_tmpl
+graft src
+global-exclude *.py[co]
