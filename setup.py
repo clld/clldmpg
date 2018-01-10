@@ -26,7 +26,11 @@ setup(
     package_dir={'': 'src'},
     include_package_data=True,
     zip_safe=False,
-    install_requires=['clld~=4.0', 'purl'],
+    install_requires=[
+        'clld~=4.0',
+        'purl',
+        'clldutils~=2.0',
+    ],
     extras_require={
         'test': ['pytest-clld', 'coverage>=4.2', 'pytest-cov'],
         'dev': ['flake8', 'wheel', 'twine'],
@@ -35,8 +39,8 @@ setup(
         ('**.py', 'python', None),
         ('**.mako', 'mako', None),
         ('static/**', 'ignore', None)]},
-    entry_points="""\
-        [pyramid.scaffold]
-        clldmpg_app=clldmpg.scaffolds:ClldAppTemplate
-""")
-
+    entry_points={
+        'pyramid.scaffold': ['clldmpg_app=clldmpg.scaffolds:ClldAppTemplate'],
+        'console_scripts': ['clldmpg=clldmpg.__main__:main'],
+    },
+)

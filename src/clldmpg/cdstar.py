@@ -9,12 +9,15 @@ these binary objects in clld apps.
 from __future__ import unicode_literals, print_function, division
 from mimetypes import guess_type
 from functools import partial
+import importlib
 
 from purl import URL
 from clld.web.util.htmllib import HTML, literal
 from clld.web.util.helpers import icon
 from clld.web.datatables.base import Col
 from clldutils.misc import format_size
+from clldutils.jsonlib import load
+from clldutils.path import Path
 
 __all__ = [
     'mimetype', 'maintype', 'bitstream_url', 'link', 'MediaCol', 'audio', 'video',
@@ -149,3 +152,18 @@ def video(obj, **kw):
     if obj.jsondata.get('thumbnail'):
         kw['poster'] = bitstream_url(obj, type_='thumbnail')
     return _media('video', obj, **kw)
+
+
+def downloads(req):
+    mod = importlib.import_module(req.registry.settings['clld.pkg'])
+    pkg_dir = Path(mod.__file__).parent
+
+    def bitstream_link(oid, spec):
+        url = SERVICE_URL.path(
+            '/bitstreams/{0}/{1}'.format(oid, spec['bitstreamid'])).as_string()
+        return HTML.a(
+            '{0} [{1}]'.format(spec['bitstreamid'], format_size(spec['filesize'])),
+            href=url)
+
+    for rel, spec in sorted(load(pkg_dir.joinpath('static', 'downloads.json')).items()):
+        yield rel, [bitstream_link(spec['oid'], bs) for bs in spec['bitstreams']]
