@@ -156,7 +156,7 @@ def video(obj, **kw):
 
 def downloads(req):
     mod = importlib.import_module(req.registry.settings['clld.pkg'])
-    pkg_dir = Path(mod.__file__).parent
+    dls = Path(mod.__file__).parent.joinpath('static', 'downloads.json')
 
     def bitstream_link(oid, spec):
         url = SERVICE_URL.path(
@@ -165,5 +165,6 @@ def downloads(req):
             '{0} [{1}]'.format(spec['bitstreamid'], format_size(spec['filesize'])),
             href=url)
 
-    for rel, spec in sorted(load(pkg_dir.joinpath('static', 'downloads.json')).items()):
+    dls = load(dls) if dls.exists() else {}
+    for rel, spec in sorted(dls.items()):
         yield rel, [bitstream_link(spec['oid'], bs) for bs in spec['bitstreams']]
