@@ -1,9 +1,9 @@
 <%namespace name="util" file="util.mako"/>
 <%! from clldmpg import cdstar %>
 
-<%def name="downloads(pkg_dir)">
+<%def name="downloads(request)">
     <div class="accordion" id="downloads" style="margin-top: 1em; clear: right;">
-        % for version, links in reversed(list(cdstar.downloads(pkg_dir))):
+        % for version, links in reversed(list(cdstar.downloads(request))):
             % if loop.first:
                 <%util:accordion_group eid="acc-${version.replace('.', '-')}" parent="downloads" title="Version ${version}" open="True">
                     <ul>
