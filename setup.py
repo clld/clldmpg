@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='clldmpg',
-    version='3.1.0',
+    version='3.1.1',
     description=(
         'Python library supporting development of CLLD apps maintained by MPI SHH'),
     long_description='',
@@ -33,7 +33,7 @@ setup(
     ],
     extras_require={
         'test': ['mock>=2.0', 'pytest-clld', 'pytest-mock', 'coverage>=4.2', 'pytest-cov'],
-        'dev': ['flake8', 'wheel', 'twine'],
+        'dev': ['tox', 'flake8', 'wheel', 'twine'],
     },
     message_extractors={'src/clldmpg': [
         ('**.py', 'python', None),
