@@ -32,7 +32,7 @@ setup(
         'clldutils~=2.0',
     ],
     extras_require={
-        'test': ['pytest-clld', 'coverage>=4.2', 'pytest-cov'],
+        'test': ['mock>=2.0', 'pytest-clld', 'pytest-mock', 'coverage>=4.2', 'pytest-cov'],
         'dev': ['flake8', 'wheel', 'twine'],
     },
     message_extractors={'src/clldmpg': [
