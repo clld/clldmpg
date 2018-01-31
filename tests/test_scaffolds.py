@@ -17,3 +17,4 @@ def test_ClldAppTemplate(tmpdir, mocker):
         },
     )
     tmpdir.ensure('pkg', 'views.py')
+    tmpdir.ensure('migrations', 'env.py')

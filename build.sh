@@ -6,7 +6,7 @@ VENVS=~/venvs
 WORKING=`pwd`
 
 cd $VENVS
-python -m venv testapp
+python3 -m venv testapp
 cd testapp
 . bin/activate
 pip install -U setuptools

@@ -8,7 +8,8 @@ tox -r
 
 - Make sure all scaffold tests pass:
 ```
-./venvs/clld/clldmpg/build.sh "<prev-rel-no>"
+cd ./venvs/clld/clldmpg
+./build.sh "<prev-rel-no>"
 ```
 
 - Change `setup.py` version to the new version number.

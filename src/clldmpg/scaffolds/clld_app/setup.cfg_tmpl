@@ -5,13 +5,19 @@ exclude = .tox
 
 [tool:pytest]
 minversion = 3.1
-testpaths = {{package}}/tests
+testpaths = tests
 mock_use_standalone_module = true
 filterwarnings =
     ignore::sqlalchemy.exc.SAWarning
 addopts =
     --cov={{package}}
     --cov-report term-missing
+
+[coverage:run]
+source = {{package}}
+
+[coverage:report]
+show_missing = true
 
 [compile_catalog]
 directory = {{package}}/locale
