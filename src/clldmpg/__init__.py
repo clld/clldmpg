@@ -22,7 +22,8 @@ def includeme(config):
     config.registry.registerUtility(MpgOlacConfig(), IOlacConfig)
     config.add_static_view('clldmpg-static', 'clldmpg:static')
     config.add_settings({'clld.publisher_logo': 'clldmpg:static/minerva.png'})
-
+    config.add_settings(
+        {'clld.privacy_policy_url': 'https://www.shh.mpg.de/138116/privacy-policy'})
     config.add_route('google-site-verification', 'googlebbc8f4da1abdc58b.html')
     config.add_view(
         lambda r: Response('google-site-verification: googlebbc8f4da1abdc58b.html'),

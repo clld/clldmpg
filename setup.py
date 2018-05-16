@@ -27,13 +27,24 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=[
-        'clld~=4.0',
+        'clld>=4.2.1',
         'purl',
         'clldutils~=2.0',
     ],
     extras_require={
-        'test': ['mock>=2.0', 'pytest-clld', 'pytest-mock', 'coverage>=4.2', 'pytest-cov'],
-        'dev': ['tox', 'flake8', 'wheel', 'twine'],
+        'test': [
+            'mock>=2.0',
+            'pytest-clld',
+            'pytest-mock',
+            'coverage>=4.2',
+            'pytest-cov',
+        ],
+        'dev': [
+            'tox',
+            'flake8',
+            'wheel',
+            'twine',
+        ],
     },
     message_extractors={'src/clldmpg': [
         ('**.py', 'python', None),
