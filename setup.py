@@ -27,7 +27,7 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=[
-        'clld>=4.2.1',
+        'clld>=4.2.2',
         'purl',
         'clldutils~=2.0',
     ],
