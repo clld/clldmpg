@@ -27,6 +27,7 @@ git tag -a v0.2 -m"first version to be released on pypi"
 - Release to PyPI
 ```
 git checkout tags/v$1
+python setup.py clean --all
 rm dist/*
 python setup.py sdist bdist_wheel
 twine upload dist/*
