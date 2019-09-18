@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 
 def test_ClldAppTemplate(tmpdir, mocker):
     from clldmpg.scaffolds import ClldAppTemplate

@@ -1,6 +1,3 @@
-# coding: utf8
-from __future__ import unicode_literals, print_function, division
-
 import pytest
 from pyramid import config
 from clld.db.meta import DBSession, Base

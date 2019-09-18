@@ -1,8 +1,6 @@
-# coding: utf8
-from __future__ import unicode_literals, print_function, division
 import sys
+from pathlib import Path
 
-from clldutils.path import Path
 from clldutils.clilib import ArgumentParserWithLogging
 
 from clldmpg import commands

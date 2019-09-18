@@ -1,4 +1,3 @@
-# coding: utf8
 """
 For all clld apps hosted by MPI SHH, we store all binary content (e.g. multi-media files)
 in our CDSTAR [1] instance hosted at GWDG. This module provides functionality to integrate
@@ -6,10 +5,10 @@ these binary objects in clld apps.
 
 [1] https://info.gwdg.de/docs/doku.php?id=en:services:storage_services:gwdg_cdstar:start
 """
-from __future__ import unicode_literals, print_function, division
 from mimetypes import guess_type
 from functools import partial
 import importlib
+from pathlib import Path
 
 from purl import URL
 from clld.web.util.htmllib import HTML, literal
@@ -17,7 +16,6 @@ from clld.web.util.helpers import icon
 from clld.web.datatables.base import Col
 from clldutils.misc import format_size
 from clldutils.jsonlib import load
-from clldutils.path import Path
 
 __all__ = [
     'mimetype', 'maintype', 'bitstream_url', 'link', 'MediaCol', 'audio', 'video',

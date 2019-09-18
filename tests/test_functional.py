@@ -1,6 +1,3 @@
-# coding: utf8
-from __future__ import unicode_literals, print_function, division
-
 
 def test_links(testapp):
     body = testapp.get('/legal').body.decode('utf8')

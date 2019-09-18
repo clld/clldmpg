@@ -1,15 +1,13 @@
-# coding: utf8
-from __future__ import unicode_literals, print_function, division
 import os
 import re
+from pathlib import Path
 
 from clldutils.clilib import command
-from clldutils.path import Path, read_text
 from clldutils.jsonlib import load, update
 
 
 def app_name(project_dir):
-    setup = read_text(project_dir / 'setup.py')
+    setup = (project_dir / 'setup.py').read_text(encoding='utf-8')
     match = re.search('main\s*=\s*(?P<name>[a-z0-9]+):main', setup)
     if match:
         return match.group('name')

@@ -3,16 +3,17 @@ from setuptools import setup, find_packages
 
 setup(
     name='clldmpg',
-    version='3.3.2.dev0',
+    version='3.4.0',
     description=(
         'Python library supporting development of CLLD apps maintained by MPI SHH'),
     long_description='',
     classifiers=[
         "Intended Audience :: Developers",
         "Programming Language :: Python",
-        "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.4",
+        "Programming Language :: Python :: 3.5",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: Implementation :: CPython",
         "Topic :: Internet :: WWW/HTTP",
         "Topic :: Internet :: WWW/HTTP :: WSGI",
@@ -29,7 +30,7 @@ setup(
     install_requires=[
         'clld>=4.2.2',
         'purl',
-        'clldutils~=2.0',
+        'clldutils>=2.0',
     ],
     extras_require={
         'test': [
