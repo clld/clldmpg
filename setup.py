@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='clldmpg',
-    version='3.4.1.dev0',
+    version='3.5.0',
     description=(
         'Python library supporting development of CLLD apps maintained by MPI SHH'),
     long_description='',
@@ -28,12 +28,13 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=[
+        'clldutils>=3.5'
         'clld>=4.2.2',
         'purl',
-        'clldutils>=2.0',
     ],
     extras_require={
         'test': [
+            'cdstarcat',
             'mock>=2.0',
             'pytest-clld',
             'pytest-mock',

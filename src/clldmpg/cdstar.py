@@ -5,10 +5,10 @@ these binary objects in clld apps.
 
 [1] https://info.gwdg.de/docs/doku.php?id=en:services:storage_services:gwdg_cdstar:start
 """
-from mimetypes import guess_type
-from functools import partial
+import pathlib
+import functools
 import importlib
-from pathlib import Path
+import mimetypes
 
 from purl import URL
 from clld.web.util.htmllib import HTML, literal
@@ -33,7 +33,7 @@ def mimetype(obj):
         return obj.jsondata['mimetype']
     if obj.jsondata.get('mime_type'):
         return obj.jsondata['mime_type']
-    return guess_type(obj.jsondata['original'])[0] or 'application/octet-stream'
+    return mimetypes.guess_type(obj.jsondata['original'])[0] or 'application/octet-stream'
 
 
 def maintype(obj, mimetype_=None):
@@ -143,7 +143,7 @@ def _media(maintype_, obj, **kw):
         style='margin-top: 10px')
 
 
-audio = partial(_media, 'audio')
+audio = functools.partial(_media, 'audio')
 
 
 def video(obj, **kw):
@@ -154,7 +154,7 @@ def video(obj, **kw):
 
 def downloads(req):
     mod = importlib.import_module(req.registry.settings['clld.pkg'])
-    dls = Path(mod.__file__).parent.joinpath('static', 'downloads.json')
+    dls = pathlib.Path(mod.__file__).parent.joinpath('static', 'downloads.json')
 
     def bitstream_link(oid, spec):
         url = SERVICE_URL.path(

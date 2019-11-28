@@ -1,43 +1,41 @@
+"""
+Upload downloads for a specific version of the data to CDSTAR
+"""
 import os
 import re
-from pathlib import Path
+import pathlib
 
-from clldutils.clilib import command
 from clldutils.jsonlib import load, update
 
-
-def app_name(project_dir):
-    setup = (project_dir / 'setup.py').read_text(encoding='utf-8')
-    match = re.search('main\s*=\s*(?P<name>[a-z0-9]+):main', setup)
-    if match:
-        return match.group('name')
+try:
+    from cdstarcat.catalog import Catalog
+except ImportError:  # pragma: no cover
+    Catalog = None
 
 
-@command()
-def dl2cdstar(args):
-    app = app_name(args.project)
-    if not app:
-        args.log.error('cannot parse package name')
-        return
+def register(parser):
+    parser.add_argument("--version", help='data version', default="1.0")
+    parser.add_argument("--description", default=None)
 
-    try:
-        from cdstarcat.catalog import Catalog
-    except ImportError:
+
+def run(args):
+    if not Catalog:  # pragma: no cover
         args.log.error('pip install cdstarcat')
         return
 
-    title_pattern = re.compile('%s (?P<version>[0-9.]+) - downloads' % re.escape(app))
-    title = '{0} {1} - downloads'.format(app, args.version)
-    pkg_dir = args.project.joinpath(app)
+    title_pattern = re.compile('%s (?P<version>[0-9.]+) - downloads' % re.escape(args.app_name))
+    title = '{0} {1} - downloads'.format(args.app_name, args.version)
+    pkg_dir = args.project.joinpath(args.app_name)
     with Catalog(
-            Path(os.environ['CDSTAR_CATALOG']),
+            pathlib.Path(os.environ['CDSTAR_CATALOG']),
             cdstar_url=os.environ['CDSTAR_URL'],
             cdstar_user=os.environ['CDSTAR_USER'],
             cdstar_pwd=os.environ['CDSTAR_PWD']) as cat:
         obj = cat.api.get_object()
         obj.metadata = {"creator": "pycdstar", "title": title}
-        if args.args:
-            obj.metadata["description"] = args.args[0]
+        if args.description:
+            obj.metadata["description"] = args.description
+
         for fname in pkg_dir.joinpath('static', 'download').iterdir():
             if fname.is_file() and not fname.name.startswith('.'):
                 print(fname.name)
@@ -47,7 +45,7 @@ def dl2cdstar(args):
 
     fname = pkg_dir.joinpath('static', 'downloads.json')
     with update(fname, default={}, indent=4) as downloads:
-        for oid, spec in load(Path(os.environ['CDSTAR_CATALOG'])).items():
+        for oid, spec in load(pathlib.Path(os.environ['CDSTAR_CATALOG'])).items():
             if 'metadata' in spec and 'title' in spec['metadata']:
                 match = title_pattern.match(spec['metadata']['title'])
                 if match:
