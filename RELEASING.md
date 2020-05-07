@@ -6,12 +6,6 @@ Releasing clldmpg
 tox -r
 ```
 
-- Make sure all scaffold tests pass:
-```
-cd ./venvs/clld/clldmpg
-./build.sh "<prev-rel-no>"
-```
-
 - Change `setup.py` version to the new version number.
 
 - Bump version number:
