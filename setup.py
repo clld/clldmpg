@@ -36,7 +36,6 @@ setup(
     extras_require={
         'test': [
             'cdstarcat',
-            'mock>=2.0',
             'pytest-clld',
             'pytest-mock',
             'coverage>=4.2',
