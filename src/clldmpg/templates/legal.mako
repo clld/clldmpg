@@ -4,9 +4,9 @@
 
 <p>
     This website is part of the online presence of the
-    Max Planck Institute for the Science of Human History.
+    Max Planck Institute for Evolutionary Anthropology.
     Please refer to the
-    <a href="https://www.shh.mpg.de/2435/imprint"><strong>corresponding imprint</strong></a> for provider
+    <a href="https://www.eva.mpg.de/imprint.html"><strong>corresponding imprint</strong></a> for provider
     information.
 </p>
 

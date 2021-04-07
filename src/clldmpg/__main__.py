@@ -11,7 +11,7 @@ import clldmpg.commands
 
 def app_name(project_dir):
     setup = (project_dir / 'setup.py').read_text(encoding='utf-8')
-    match = re.search('main\s*=\s*(?P<name>[a-z0-9]+):main', setup)
+    match = re.search(r'main\s*=\s*(?P<name>[a-z0-9]+):main', setup)
     if match:
         return match.group('name')
 

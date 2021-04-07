@@ -6,7 +6,7 @@ def test_MpgOlacConfig(mocker):
 
     cfg = MpgOlacConfig()
     assert cfg.admin(None).role == 'Admin'
-    assert 'shh' in cfg.description(mocker.MagicMock())['institution'].url
+    assert 'eva' in cfg.description(mocker.MagicMock())['institution'].url
 
 
 def test_includeme():
