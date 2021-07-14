@@ -29,7 +29,7 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=[
-        'clldutils>=3.5'
+        'clldutils>=3.5',
         'clld>=4.2.2',
         'purl',
     ],
