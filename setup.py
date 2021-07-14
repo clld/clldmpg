@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='clldmpg',
-    version='4.1.1.dev0',
+    version='4.1.1',
     description=(
         'Python library supporting development of CLLD apps maintained by MPI SHH'),
     long_description='',
