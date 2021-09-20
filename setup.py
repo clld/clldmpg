@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='clldmpg',
-    version='4.1.2.dev0',
+    version='4.2.0',
     description=(
         'Python library supporting development of CLLD apps maintained by MPI EVA'),
     long_description='',
@@ -21,8 +21,8 @@ setup(
     ],
     keywords='web pyramid',
     author="Robert Forkel",
-    author_email="robert_forkel@eva.mpg.de",
-    url="http://clld.org",
+    author_email="dlce.rdm@eva.mpg.de",
+    url="https://clld.org",
     license="Apache Software License",
     packages=find_packages(where='src'),
     package_dir={'': 'src'},
