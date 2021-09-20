@@ -5,7 +5,7 @@ setup(
     name='clldmpg',
     version='4.1.2.dev0',
     description=(
-        'Python library supporting development of CLLD apps maintained by MPI SHH'),
+        'Python library supporting development of CLLD apps maintained by MPI EVA'),
     long_description='',
     classifiers=[
         "Intended Audience :: Developers",
