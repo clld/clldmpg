@@ -1,5 +1,5 @@
 """
-For all clld apps hosted by MPI SHH, we store all binary content (e.g. multi-media files)
+For all clld apps hosted by MPI EVA, we store all binary content (e.g. multi-media files)
 in our CDSTAR [1] instance hosted at GWDG. This module provides functionality to integrate
 these binary objects in clld apps.
 
