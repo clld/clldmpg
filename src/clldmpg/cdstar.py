@@ -21,7 +21,7 @@ __all__ = [
     'mimetype', 'maintype', 'bitstream_url', 'link', 'MediaCol', 'audio', 'video',
     'linked_image']
 
-SERVICE_URL = URL("https://cdstar.shh.mpg.de/")
+SERVICE_URL = URL("https://cdstar.eva.mpg.de/")
 
 
 def mimetype(obj):
