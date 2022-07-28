@@ -6,7 +6,7 @@ Releasing clldmpg
 tox -r
 ```
 
-- Change `setup.py` version to the new version number.
+- Change `setup.cfg` version to the new version number.
 
 - Bump version number:
 ```
@@ -23,11 +23,11 @@ git tag -a v0.2 -m"first version to be released on pypi"
 git checkout tags/v$1
 python setup.py clean --all
 rm dist/*
-python setup.py sdist bdist_wheel
+python -m build -n
 twine upload dist/*
 ```
 
-- Change `setup.py` version to the new version number.
+- Change `setup.cfg` version to the new version number.
 
 - Set version number for next development cycle:
 ```

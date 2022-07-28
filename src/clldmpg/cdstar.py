@@ -9,8 +9,8 @@ import pathlib
 import functools
 import importlib
 import mimetypes
+import urllib.parse
 
-from purl import URL
 from clld.web.util.htmllib import HTML, literal
 from clld.web.util.helpers import icon
 from clld.web.datatables.base import Col
@@ -21,7 +21,12 @@ __all__ = [
     'mimetype', 'maintype', 'bitstream_url', 'link', 'MediaCol', 'audio', 'video',
     'linked_image']
 
-SERVICE_URL = URL("https://cdstar.eva.mpg.de/")
+SERVICE_URL = "https://cdstar.eva.mpg.de/"
+
+
+def service_url(path):
+    url = urllib.parse.urlparse(SERVICE_URL)
+    return urllib.parse.urlunparse((url.scheme, url.netloc, path, '', '', ''))
 
 
 def mimetype(obj):
@@ -45,7 +50,7 @@ def bitstream_url(obj, type_='original'):
     path = '/bitstreams/{0}/{1}'.format(
         obj.jsondata['objid'],
         obj.jsondata.get(type_) or obj.jsondata['original'])
-    return SERVICE_URL.path(path).as_string()
+    return service_url(path)
 
 
 ICON_FOR_MIMETYPE = {
@@ -157,8 +162,7 @@ def downloads(req):
     dls = pathlib.Path(mod.__file__).parent.joinpath('static', 'downloads.json')
 
     def bitstream_link(oid, spec):
-        url = SERVICE_URL.path(
-            '/bitstreams/{0}/{1}'.format(oid, spec['bitstreamid'])).as_string()
+        url = service_url('/bitstreams/{0}/{1}'.format(oid, spec['bitstreamid']))
         return HTML.a(
             '{0} [{1}]'.format(spec['bitstreamid'], format_size(spec['filesize'])),
             href=url)
