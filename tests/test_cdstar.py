@@ -16,17 +16,23 @@ class MockObject(object):
         ({}, dict(mime_type='x'), 'x'),
         ({'mimetype': 'x'}, dict(), 'x'),
         ({'mime_type': 'x'}, dict(), 'x'),
+        ({'mediaType': 'x'}, dict(), 'x'),
     ])
 def test_mimetype(jsondata, kw, expected):
     assert mimetype(MockObject(jsondata, **kw)) == expected
 
 
-def test_bitstream_url():
-    obj = MockObject(dict(objid='x', original='y'))
-    assert bitstream_url(obj).endswith('/x/y')
-
-    obj = MockObject(dict(objid='x', other='y'))
-    assert bitstream_url(obj, type_='other').endswith('/x/y')
+@pytest.mark.parametrize(
+    "jsondata,kw,endswith",
+    [
+        (dict(objid='x', original='y'), {}, '/x/y'),
+        (dict(objid='x', other='y'), dict(type_='other'), '/x/y'),
+        (dict(downloadUrl='http://example.org'), {}, 'example.org'),
+    ]
+)
+def test_bitstream_url(jsondata, kw, endswith):
+    obj = MockObject(jsondata)
+    assert bitstream_url(obj, **kw).endswith(endswith)
 
 
 def test_MediaCol(mocker):

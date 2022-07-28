@@ -34,10 +34,14 @@ def mimetype(obj):
         return obj.mimetype
     if hasattr(obj, 'mime_type'):
         return obj.mime_type
-    if obj.jsondata.get('mimetype'):
-        return obj.jsondata['mimetype']
-    if obj.jsondata.get('mime_type'):
-        return obj.jsondata['mime_type']
+    for key in [
+        'mediaType',  # CLDF property name
+        'Media_Type',  # CLDF default column name
+        'mimetype',
+        'mime_type',
+    ]:
+        if obj.jsondata.get(key):
+            return obj.jsondata[key]
     return mimetypes.guess_type(obj.jsondata['original'])[0] or 'application/octet-stream'
 
 
@@ -47,6 +51,9 @@ def maintype(obj, mimetype_=None):
 
 
 def bitstream_url(obj, type_='original'):
+    for key in ['downloadUrl', 'Download_URL']:
+        if obj.jsondata.get(key):
+            return obj.jsondata[key]
     path = '/bitstreams/{0}/{1}'.format(
         obj.jsondata['objid'],
         obj.jsondata.get(type_) or obj.jsondata['original'])
