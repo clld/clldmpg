@@ -2,9 +2,9 @@ Releasing clldmpg
 =================
 
 - Do platform test via tox:
-```
-tox -r
-```
+  ```shell
+  tox -r
+  ```
 
 - Change `setup.cfg` version to the new version number.
 
@@ -30,12 +30,12 @@ twine upload dist/*
 - Change `setup.cfg` version to the new version number.
 
 - Set version number for next development cycle:
-```
-git commit -a -m"bumped version number"
-```
+  ```shell
+  git commit -a -m"bumped version number"
+  ```
 
 - Push to github:
-```
-git push origin
-git push --tags
-```
+  ```shell
+  git push origin
+  git push --tags
+  ```
