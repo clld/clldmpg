@@ -2,7 +2,7 @@ import pytest
 from clldmpg.cdstar import *
 
 
-class MockObject(object):
+class MockObject:
     def __init__(self, jsondata, **attrs):
         self.jsondata = jsondata
         for k, v in attrs.items():

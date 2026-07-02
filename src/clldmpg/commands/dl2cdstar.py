@@ -13,18 +13,18 @@ except ImportError:  # pragma: no cover
     Catalog = None
 
 
-def register(parser):
+def register(parser):  # pylint: disable=C0116
     parser.add_argument("--version", help='data version', default="1.0")
     parser.add_argument("--description", default=None)
 
 
-def run(args):
+def run(args):  # pylint: disable=C0116
     if not Catalog:  # pragma: no cover
         args.log.error('pip install cdstarcat')
         return
 
     title_pattern = re.compile('%s (?P<version>[0-9.]+) - downloads' % re.escape(args.app_name))
-    title = '{0} {1} - downloads'.format(args.app_name, args.version)
+    title = f'{args.app_name} {args.version} - downloads'
     pkg_dir = args.project.joinpath(args.app_name)
     with Catalog(
             pathlib.Path(os.environ['CDSTAR_CATALOG']),
@@ -52,5 +52,5 @@ def run(args):
                     if match.group('version') not in downloads:
                         spec['oid'] = oid
                         downloads[match.group('version')] = spec
-    args.log.info('{0} written'.format(fname))
-    args.log.info('{0}'.format(os.environ['CDSTAR_CATALOG']))
+    args.log.info('%s written', fname)
+    args.log.info('%s', os.environ['CDSTAR_CATALOG'])

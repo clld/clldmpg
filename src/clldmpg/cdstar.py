@@ -18,8 +18,7 @@ from clldutils.misc import format_size
 from clldutils.jsonlib import load
 
 __all__ = [
-    'mimetype', 'maintype', 'bitstream_url', 'link', 'MediaCol', 'audio', 'video',
-    'linked_image']
+    'mimetype', 'maintype', 'bitstream_url', 'link', 'MediaCol', 'audio', 'video', 'linked_image']
 
 SERVICE_URL = "https://cdstar.eva.mpg.de/"
 
@@ -54,9 +53,8 @@ def bitstream_url(obj, type_='original'):
     for key in ['downloadUrl', 'Download_URL']:
         if obj.jsondata.get(key):
             return obj.jsondata[key]
-    path = '/bitstreams/{0}/{1}'.format(
-        obj.jsondata['objid'],
-        obj.jsondata.get(type_) or obj.jsondata['original'])
+    path = (f"/bitstreams/{obj.jsondata['objid']}/"
+            f"{obj.jsondata.get(type_) or obj.jsondata['original']}")
     return service_url(path)
 
 
@@ -130,28 +128,27 @@ class MediaCol(Col):
 
 def linked_image(obj, check=True):
     if check and maintype(obj) != 'image':
-        raise ValueError('type mismatch: {0} and image'.format(maintype(obj)))
+        raise ValueError(f'type mismatch: {maintype(obj)} and image')
     return HTML.a(
         HTML.img(src=bitstream_url(obj, 'web'), class_='image'),
         href=bitstream_url(obj),
-        title="View image ({0})".format(format_size(obj.jsondata.get('size', 0))))
+        title=f"View image ({format_size(obj.jsondata.get('size', 0))})")
 
 
 def _media(maintype_, obj, **kw):
     label = kw.pop('label', None)
     assert maintype_ in ['audio', 'video']
     if maintype(obj) != maintype_:
-        raise ValueError('type mismatch: {0} and {1}'.format(maintype(obj), maintype_))
+        raise ValueError(f'type mismatch: {maintype(obj)} and {maintype_}')
     kw.setdefault('controls', 'controls')
     media_element = getattr(HTML, maintype_)(
-        literal('Your browser does not support the <code>{0}</code> element.'.format(
-            maintype_)),
+        literal(f'Your browser does not support the <code>{maintype_}</code> element.'),
         HTML.source(src=bitstream_url(obj, type_='web'), type=mimetype(obj)), **kw)
     return HTML.div(
         media_element,
         HTML.br(),
         link(obj, label=label),
-        class_='cdstar_{0}_link'.format(maintype_),
+        class_=f'cdstar_{maintype_}_link',
         style='margin-top: 10px')
 
 
@@ -169,11 +166,15 @@ def downloads(req):
     dls = pathlib.Path(mod.__file__).parent.joinpath('static', 'downloads.json')
 
     def bitstream_link(oid, spec):
-        url = service_url('/bitstreams/{0}/{1}'.format(oid, spec['bitstreamid']))
-        return HTML.a(
-            '{0} [{1}]'.format(spec['bitstreamid'], format_size(spec['filesize'])),
-            href=url)
+        url = service_url(f"/bitstreams/{oid}/{spec['bitstreamid']}")
+        return HTML.a(f"{spec['bitstreamid']} [{format_size(spec['filesize'])}]", href=url)
+
+    def sortkey(i):
+        try:
+            return tuple(map(int, i[0].split('.')))
+        except:  # noqa: E722
+            return i[0]
 
     dls = load(dls) if dls.exists() else {}
-    for rel, spec in sorted(dls.items()):
+    for rel, spec in sorted(dls.items(), key=sortkey):
         yield rel, [bitstream_link(spec['oid'], bs) for bs in spec['bitstreams']]

@@ -2,6 +2,7 @@ import re
 import sys
 import argparse
 import contextlib
+from typing import Optional
 
 from clldutils.loglib import Logging
 from clldutils.clilib import get_parser_and_subparsers, register_subcommands, PathType
@@ -9,14 +10,17 @@ from clldutils.clilib import get_parser_and_subparsers, register_subcommands, Pa
 import clldmpg.commands
 
 
-def app_name(project_dir):
+def app_name(project_dir) -> Optional[str]:
+    """Determine the app name based on the location in the filesystem."""
     setup = (project_dir / 'setup.py').read_text(encoding='utf-8')
     match = re.search(r'main\s*=\s*(?P<name>[a-z0-9]+):main', setup)
     if match:
         return match.group('name')
+    return None
 
 
 class ProjectDirType(PathType):
+    """PathType with a couple of extra checks"""
     def __init__(self):
         PathType.__init__(self, type='dir')
 
@@ -24,13 +28,13 @@ class ProjectDirType(PathType):
         d = super().__call__(string)
         setup = d / 'setup.py'
         if not setup.exists():
-            raise argparse.ArgumentTypeError('{0}/setup.py does not exist!'.format(d))
+            raise argparse.ArgumentTypeError(f'{d}/setup.py does not exist!')
         if not app_name(d):
-            raise argparse.ArgumentTypeError('Cannot determine app name for {0}!'.format(d))
+            raise argparse.ArgumentTypeError(f'Cannot determine app name for {d}!')
         return d
 
 
-def main(args=None, catch_all=False, parsed_args=None, log=None):
+def main(args=None, catch_all=False, parsed_args=None, log=None):  # pylint: disable=C0116
     parser, subparsers = get_parser_and_subparsers('clldmpg')
     parser.add_argument(
         "--project",
