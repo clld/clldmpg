@@ -16,6 +16,12 @@ class MpgOlacConfig(OlacConfig):
 
 
 def includeme(config):
+    try:
+        from openobserve import openobserve_init
+        openobserve_init(logs=True)
+    except:
+        pass
+
     config.include('clld.web.app')
     config.registry.registerUtility(MpgOlacConfig(), IOlacConfig)
     config.add_static_view('clldmpg-static', 'clldmpg:static')
